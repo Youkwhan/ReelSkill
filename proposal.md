@@ -28,7 +28,7 @@ The filtering option of how they want to approach the study plan.
 ### LeetCode
 An online platform that hosts a vast collection of coding challenges and technical interview questions used by software engineers and tech companies for interview preparation. 
 ### Notification
-An email or messasge is sent to users to inform them about updates and reminders of the next set of problems.
+An email or message is sent to users to inform them about updates and reminders of the next set of problems.
 
 ## 4. High-Level  Requirement
 Each user role/authority
@@ -102,3 +102,39 @@ Each user role/authority
 6. **Postcondition**: The imported questions are added to my study materials or a designated deck.
 
 ###  Delete a Card
+**Story**:  As a user or admin, I want to delete a card to remove unnecessary or outdated study content.
+
+**Scenario**:
+1. **Precondition**: logged in  with  at least  one deck with cards
+2. navigate to  the  deck containing the card
+3. select  the  card  and  confirm the deletion
+4. **Postcondition**:  The selected card is permanently removed from the deck.
+
+### Delete a Deck
+**Story**:  As a user or admin, I want to delete a deck
+
+**Scenario**:
+1. **Precondition**: logged in  with  at least  one deck
+2. navigate to  the  deck 
+3. select  the  card  and  confirm the deletion
+4. **Postcondition**: The selected deck is permanently deleted from my profile, and its associated cards are also removed.
+
+### Filter Cards
+**Story**: As a user or admin, I want to filter cards to quickly find specific study materials.
+
+**Scenario**:
+1. **Precondition**: I am logged into the platform.
+2. I navigate to the deck.
+3. I use the filtering options, which is our study option of ordering. (maybe later filter by tags)
+5. **PostCondtion**: The cards displayed are filtered based on the selected criteria.
+
+### Select Difficulty
+**Story**:  When  I complete a card I  want  to  categorize it
+
+**Scenario**:
+1. **Precondition**: I am logged into the platform.
+2. While studying and using the cards
+3. Select the desired difficulty level (easy, medium, hard) for study materials.
+4. The space repetition algorithm will sort the card in the correct position
+5. Will get color-coded
+6. **Postcondition**: The study materials displayed are filtered based on the selected difficulty level.
