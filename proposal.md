@@ -10,7 +10,7 @@ Therefore, there is a need for a software solution that addresses these pain poi
 ## 2. Technical Solution
 
 ### Scenario
-Youkwhan needs to practice coding problems on LeetCode for technical interviews and to improve his problem-solving skills in his career. He navigates to the LeetCode section of the platform, where he finds a customized list of recommended questions based on difficulty levels. Youkwhan selects a few questions from the list and starts practicing. After solving each question, he rates his confidence level and adds his notes to the SR-Capstone platform. He schedules spaced repetition reviews for those questions accordingly.
+Youkwhan needs to practice coding problems on LeetCode for technical interviews and to improve his problem-solving skills in his career. He navigates to the LeetCode section of the platform, where he finds a customized list of recommended questions based on difficulty levels. Youkwhan selects a few questions from the list and starts practicing. After solving each question, he rates his confidence level and adds his notes to the ReelSkill platform. He schedules spaced repetition reviews for those questions accordingly.
 
 As Youkwhan continues practicing, he receives notifications reminding him of scheduled reviews and suggesting new questions based on his performance and learning objectives. With the help of the platform's personalized study plan and spaced repetition feature, Youkwhan feels more confident and prepared for the next challenge.
 
