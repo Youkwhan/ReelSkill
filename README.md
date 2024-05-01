@@ -1,2 +1,2 @@
-# SR-capstone
-Spaced-Repetition capstone
+# ReelSkill
+Spaced-Repetition application
