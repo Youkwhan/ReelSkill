@@ -2,6 +2,7 @@ package org.reelskill.models;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class User {
     private int userId;
@@ -15,13 +16,13 @@ public class User {
         public User() {
         }
 
-        public User(int userId, String emailAddress, String username, String password, Role role, List<Deck> deckList) {
+        public User(int userId, String emailAddress, String username, String password, Role role) {
             this.userId = userId;
             this.emailAddress = emailAddress;
             this.username = username;
             this.password = password;
             this.role = role;
-            this.deckList = deckList;
+            this.deckList = new ArrayList<>();
         }
 
         // Getters and setters
@@ -72,4 +73,17 @@ public class User {
         public void setDeckList(List<Deck> deckList) {
             this.deckList = deckList;
         }
-        }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return userId == user.userId && Objects.equals(username, user.username) && Objects.equals(password, user.password) && Objects.equals(emailAddress, user.emailAddress) && role == user.role && Objects.equals(deckList, user.deckList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, username, password, emailAddress, role, deckList);
+    }
+}

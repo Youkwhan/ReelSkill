@@ -4,6 +4,7 @@ import org.reelskill.data.mapper.DeckMapper;
 import org.reelskill.data.mapper.UserMapper;
 import org.reelskill.models.Deck;
 import org.reelskill.models.User;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
@@ -25,7 +26,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
     public User findById(int userId) {
         String sql = """
                 select user_id, username, password, email_address, role
-                from user
+                from users
                 where user_id = ?;
                 """;
         return jdbcTemplate.query(sql, new UserMapper(), userId).stream()
@@ -37,7 +38,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
     public User authenticateUser(String username, String password) {
         String sql = """
                 select user_id, username, password, email_address, role
-                from user
+                from users
                 where username = ? and password = ?;
                 """;
         User user = jdbcTemplate.query(sql, new UserMapper(), username, password).stream()
@@ -52,19 +53,24 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
     @Override
     public String getUserEmailAddress(String username) {
-        String sql = """
+        try {
+            String sql = """
                 select email_address
-                from user
+                from users
                 where username = ?;
                 """;
-        return jdbcTemplate.queryForObject(sql, String.class, username);
+            return jdbcTemplate.queryForObject(sql, String.class, username);
+        } catch (EmptyResultDataAccessException ex) {
+            // Log or handle the exception as needed
+            return null;
+        }
     }
 
     @Transactional
     @Override
     public User createUser(User user) {
         String sql = """
-                insert into user (username, password, email_address, role)
+                insert into users (username, password, email_address, role)
                 values (?, ?, ?, ?);
                 """;
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -87,13 +93,12 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
     private void assignDeckToUser(User user) {
         String sql = """
-                select deck_id, deck_name, created_at
+                select deck_id, user_id, deck_name, created_at
                 from decks
                 where user_id = ?;
                 """;
 
         List<Deck> decks = jdbcTemplate.query(sql, new DeckMapper(), user.getUserId());
         user.setDeckList(decks);
-
     }
 }
