@@ -23,13 +23,13 @@ CREATE TABLE decks (
 -- Enum table for card types
 CREATE TABLE cardType (
     cardType_id INT PRIMARY KEY AUTO_INCREMENT,
-    cardType_name ENUM('easy', 'medium', 'hard') UNIQUE NOT NULL
+    difficulty_level ENUM('easy', 'medium', 'hard') UNIQUE
 );
 
 -- Enum table for card tags
 CREATE TABLE cardTag (
     cardTag_id INT PRIMARY KEY AUTO_INCREMENT,
-    cardTag_name ENUM('easy', 'medium', 'hard') UNIQUE NOT NULL
+    difficulty_level ENUM('easy', 'medium', 'hard') UNIQUE NOT NULL
 );
 
 -- Cards table to store cards within decks
@@ -43,7 +43,7 @@ CREATE TABLE cards (
     last_reviewed TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    cardType_id INT NOT NULL,
+    cardType_id INT,
     cardTag_id INT NOT NULL,
     FOREIGN KEY (deck_id) REFERENCES decks(deck_id),
     FOREIGN KEY (cardType_id) REFERENCES cardType(cardType_id),
@@ -69,18 +69,23 @@ delimiter //
 create procedure set_known_good_state()
 begin
 
-    delete from users;
-    alter table users auto_increment = 1;
-    delete from decks;
-    alter table decks auto_increment = 1;
-    delete from cardType;
-    alter table cardType auto_increment = 1;
-    delete from cardTag;
-    alter table cardTag auto_increment = 1;
-    delete from cards;
-    alter table cards auto_increment = 1;
-    delete from recentlyDeleted;
-    alter table recentlyDeleted auto_increment = 1;
+     delete from recentlyDeleted;
+        alter table recentlyDeleted auto_increment = 1;
+
+        delete from cards;
+        alter table cards auto_increment = 1;
+
+        delete from decks;
+        alter table decks auto_increment = 1;
+
+        delete from users;
+        alter table users auto_increment = 1;
+
+        delete from cardType;
+        alter table cardType auto_increment = 1;
+
+        delete from cardTag;
+        alter table cardTag auto_increment = 1;
 
     -- data
     INSERT INTO users (email_address, username, `password`, `role`)
