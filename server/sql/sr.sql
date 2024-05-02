@@ -5,9 +5,9 @@ use space_repetition;
 -- Users table to store user information
 CREATE TABLE users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
-    email_address VARCHAR(255) UNIQUE NOT NULL,
     username VARCHAR(50) UNIQUE NOT NULL,
     `password` VARCHAR(255) NOT NULL,
+    email_address VARCHAR(255) UNIQUE NOT NULL,
     `role` ENUM('admin', 'user') DEFAULT 'user'
 );
 
@@ -23,13 +23,13 @@ CREATE TABLE decks (
 -- Enum table for card types
 CREATE TABLE cardType (
     cardType_id INT PRIMARY KEY AUTO_INCREMENT,
-    cardType_name ENUM('easy', 'medium', 'hard') UNIQUE
+    difficulty_level ENUM('easy', 'medium', 'hard') UNIQUE
 );
 
 -- Enum table for card tags
 CREATE TABLE cardTag (
     cardTag_id INT PRIMARY KEY AUTO_INCREMENT,
-    cardTag_name ENUM('easy', 'medium', 'hard') UNIQUE NOT NULL
+    difficulty_level ENUM('easy', 'medium', 'hard') UNIQUE NOT NULL
 );
 
 -- Cards table to store cards within decks
@@ -79,12 +79,12 @@ VALUES
     (2, 'Depth-First Search');
 
 
-INSERT INTO cardType (cardType_name) VALUES
+INSERT INTO cardType (difficulty_level) VALUES
     ('easy'),
     ('medium'),
     ('hard');
 
-INSERT INTO cardTag (cardTag_name) VALUES
+INSERT INTO cardTag (difficulty_level) VALUES
     ('easy'),
     ('medium'),
     ('hard');
@@ -97,19 +97,19 @@ VALUES
 
                       • If the sum is smaller than the target sum, this means that we need a bigger sum so, we are going to increment the Pointer 1 (start-pointer).',
       'https://leetcode.com/problems/two-sum/description/',
-      1, null),
+      null, 1),
     (1, '15. 3Sum', 'This problem is a follow-up of the Two Sum problem, but instead of finding two numbers that add up to a target sum, you need to find three numbers that add up to the target sum. The approach is to fix one number and then find the other two numbers using the Two Pointers pattern.',
       'https://leetcode.com/problems/3sum/description/',
-      2, null),
+      null, 2),
     (2, '704. Binary Search', 'Binary Search is a classic algorithm to efficiently find an element in a sorted array. The key idea is to repeatedly divide the search interval in half until the target element is found or the interval is empty.',
       'https://leetcode.com/problems/binary-search/description/',
-      1, null),
+      null, 1),
     (2, '56. Merge Intervals', 'Given a collection of intervals, merge all overlapping intervals. The key idea is to sort the intervals based on their start times and then merge intervals by checking for overlaps.',
       'https://leetcode.com/problems/merge-intervals/description/',
-      2, null),
+      null, 2),
     (3, '94. Binary Tree Inorder Traversal', 'Depth-First Search (DFS) is a fundamental algorithm for traversing or searching tree or graph data structures. The algorithm starts at the root node and explores as far as possible along each branch before backtracking.',
       'https://leetcode.com/problems/binary-tree-inorder-traversal/description/',
-      1, null);
+      null, 1);
 
 INSERT INTO recentlyDeleted (card_id, card_title, card_notes, leetcode_problem, number_of_times_reviewed, last_reviewed)
 VALUES
