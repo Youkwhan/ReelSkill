@@ -2,6 +2,7 @@ package org.reelskill.controllers;
 
 import org.reelskill.domain.Result;
 import org.reelskill.domain.UserService;
+import org.reelskill.models.LoginRequest;
 import org.reelskill.models.User;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,10 @@ public class UserController {
     }
 
     @GetMapping("/authenticate")
-    public ResponseEntity<User> authenticateUser(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<User> authenticateUser(@RequestBody LoginRequest loginRequest) {
+        String username = loginRequest.getUsername();
+        String password = loginRequest.getPassword();
+
         User user = service.authenticateUser(username, password);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
