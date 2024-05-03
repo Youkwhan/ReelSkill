@@ -30,7 +30,7 @@ public class UserService {
         return repository.getUserEmailAddress(username);
     }
 
-    public  Result<User> createUser(User user) {
+    public Result<User> createUser(User user) {
         Result<User> result = validate(user);
         if (!result.isSuccess())  {
             return result;
