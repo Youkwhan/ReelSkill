@@ -23,15 +23,32 @@ public class UserJdbcTemplateRepository implements UserRepository{
     }
 
     @Override
+    public List<User> findAll() {
+        String sql = """
+                select user_id, username, password, email_address, role
+                from users;
+                """;
+        List<User> users = jdbcTemplate.query(sql, new UserMapper());
+        for (User u : users) {
+            assignDeckToUser(u);
+        }
+        return users;
+    }
+
+    @Override
     public User findById(int userId) {
         String sql = """
                 select user_id, username, password, email_address, role
                 from users
                 where user_id = ?;
                 """;
-        return jdbcTemplate.query(sql, new UserMapper(), userId).stream()
+        User user = jdbcTemplate.query(sql, new UserMapper(), userId).stream()
                 .findFirst()
                 .orElse(null);
+        if (user != null) {
+            assignDeckToUser(user);
+        }
+        return user;
     }
 
     @Override

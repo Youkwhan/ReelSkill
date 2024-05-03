@@ -6,6 +6,7 @@ import org.reelskill.models.User;
 import org.springframework.stereotype.Service;
 import jakarta.validation.Validator;
 
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -16,6 +17,10 @@ public class UserService {
     public UserService(UserRepository repository, Validator validator) {
         this.repository = repository;
         this.validator = validator;
+    }
+
+    public List<User> findAll() {
+        return repository.findAll();
     }
 
     public User findById(int userId) {
