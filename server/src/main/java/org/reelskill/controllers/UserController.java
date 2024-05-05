@@ -33,7 +33,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @GetMapping("/authenticate")
+    @PostMapping("/authenticate")
     public ResponseEntity<User> authenticateUser(@RequestBody LoginRequest loginRequest) {
         String username = loginRequest.getUsername();
         String password = loginRequest.getPassword();

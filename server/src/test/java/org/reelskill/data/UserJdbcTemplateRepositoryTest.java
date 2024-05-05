@@ -35,6 +35,8 @@ class UserJdbcTemplateRepositoryTest {
     @Test
     void shouldFindUserById() {
         User expected = new User(2, "user2@example.com", "user2", "password2", Role.USER);
+        expected.setDeckList(getDecksForUser(2));
+
         User actual = repository.findById(2);
 
         assertEquals(expected, actual);

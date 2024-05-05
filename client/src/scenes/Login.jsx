@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-// import { authenticate } from '../api/authAPI';
+import { authenticate } from '../api/userApi';
 import { useAuthContext } from '../hooks';
 
 function Login() {
@@ -20,12 +20,12 @@ function Login() {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    // authenticate(credentials)
-    //   .then((user) => {
-    //     login(user);
-    //     navigate('/');
-    //   })
-    //   .catch(() => setBadCredentials(true));
+    authenticate(credentials)
+      .then((user) => {
+        login(user);
+        navigate('/');
+      })
+      .catch(() => setBadCredentials(true));
   }
 
   return (
