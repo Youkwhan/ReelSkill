@@ -63,6 +63,6 @@ public class DeckService {
             result.addMessage(violation.getMessage(), ResultType.INVALID);
         }
 
-        return null;
+        return result;
     }
 }
