@@ -83,11 +83,11 @@ public class Deck {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Deck deck = (Deck) o;
-        return deckId == deck.deckId && userId == deck.userId && Objects.equals(deckName, deck.deckName) && Objects.equals(createdAt, deck.createdAt) && Objects.equals(cardList, deck.cardList);
+        return deckId == deck.deckId && userId == deck.userId && Objects.equals(deckName, deck.deckName) && Objects.equals(createdAt, deck.createdAt) && Objects.equals(updatedAt, deck.updatedAt) && Objects.equals(cardList, deck.cardList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(deckId, userId, deckName, createdAt, cardList);
+        return Objects.hash(deckId, userId, deckName, createdAt, updatedAt, cardList);
     }
 }

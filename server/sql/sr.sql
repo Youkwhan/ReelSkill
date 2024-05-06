@@ -23,13 +23,13 @@ CREATE TABLE decks (
 
 -- Enum table for card types
 CREATE TABLE cardType (
-    cardType_id INT PRIMARY KEY AUTO_INCREMENT,
+    card_type_id INT PRIMARY KEY AUTO_INCREMENT,
     difficulty_level ENUM('easy', 'medium', 'hard') UNIQUE
 );
 
 -- Enum table for card tags
 CREATE TABLE cardTag (
-    cardTag_id INT PRIMARY KEY AUTO_INCREMENT,
+    card_tag_id INT PRIMARY KEY AUTO_INCREMENT,
     difficulty_level ENUM('easy', 'medium', 'hard') UNIQUE NOT NULL
 );
 
@@ -44,11 +44,11 @@ CREATE TABLE cards (
     last_reviewed TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    cardType_id INT,
-    cardTag_id INT NOT NULL,
+    card_type_id INT,
+    card_tag_id INT NOT NULL,
     FOREIGN KEY (deck_id) REFERENCES decks(deck_id),
-    FOREIGN KEY (cardType_id) REFERENCES cardType(cardType_id),
-    FOREIGN KEY (cardTag_id) REFERENCES cardTag(cardTag_id)
+    FOREIGN KEY (card_type_id) REFERENCES cardType(card_type_id),
+    FOREIGN KEY (card_tag_id) REFERENCES cardTag(card_tag_id)
 );
 
 
@@ -90,7 +90,7 @@ INSERT INTO cardTag (difficulty_level) VALUES
     ('medium'),
     ('hard');
 
-INSERT INTO cards (deck_id, card_title, card_notes, leetcode_problem, cardType_id, cardTag_id)
+INSERT INTO cards (deck_id, card_title, card_notes, leetcode_problem, card_type_id, card_tag_id)
 VALUES
     (1, '1. Two Sum', 'With using the Two Pointers pattern, and Pointer 1 pointing to the beginning of the array and Pointer 2 pointing to the end of the array, we will check if the numbers pointed by the pointers add up to the target sum. If they do, we have found our pair. If not, we should do one of these things:
 

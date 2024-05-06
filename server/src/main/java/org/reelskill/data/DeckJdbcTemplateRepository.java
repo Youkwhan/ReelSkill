@@ -5,9 +5,11 @@ import org.reelskill.data.mapper.DeckMapper;
 import org.reelskill.models.Card;
 import org.reelskill.models.Deck;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.PreparedStatement;
 import java.util.List;
 
 @Repository
@@ -55,19 +57,53 @@ public class DeckJdbcTemplateRepository implements DeckRepository{
                 values (?, ?)
                 returning deck_id;
                 """;
+
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        int rowAffected = jdbcTemplate.update((connection) -> {
+            PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
+            statement.setInt(1, deck.getUserId());
+            statement.setString(2, deck.getDeckName());
+            return statement;
+        }, keyHolder);
+
+        if (rowAffected > 0) {
+            deck.setDeckId(keyHolder.getKey().intValue());
+            // but new deck has no cards?
+            updateCardsToDeck(deck);
+            return deck;
+        }
+
         return null;
     }
 
+    @Transactional
     @Override
     public boolean update(Deck deck) {
+        String sql = """
+                update decks set
+                    user_id = ?,
+                    deck_name = ?
+                where deck_id = ?;
+                """;
+
+        int rowsAffected  = jdbcTemplate.update(sql,
+                deck.getUserId(),
+                deck.getDeckName(),
+                deck.getDeckId());
+
+        if (rowsAffected > 0) {
+            updateCardsToDeck(deck);
+            return true;
+        }
         return false;
     }
 
+    @Transactional
     @Override
     public boolean deleteById(int deckId) {
-        return false;
+        jdbcTemplate.update("delete from cards where deck_id = ?;", deckId);
+        return jdbcTemplate.update("delete from decks where deck_id = ?;", deckId) > 0;
     }
-
 
     private void assignCardsToDeck(Deck deck) {
         String sql = """
@@ -81,4 +117,23 @@ public class DeckJdbcTemplateRepository implements DeckRepository{
         deck.setCardList(cards);
     }
 
+    private void updateCardsToDeck(Deck deck) {
+        jdbcTemplate.update("delete from cards where deck_id = ?;", deck.getDeckId());
+        for (Card c : deck.getCardList()) {
+            String sql = """
+                    insert into cards (deck_id, card_title, card_notes, leetcode_problem,
+                        number_of_times_reviewed, last_reviewed, card_type_id, card_tag_id)
+                    values (?, ?, ?, ?, ?, ?, ?, ?);
+                    """;
+            jdbcTemplate.update(sql,
+                    deck.getDeckId(),
+                    c.getCardTitle(),
+                    c.getCardNotes(),
+                    c.getLeetcodeProblem(),
+                    c.getNumberOfTimesReviewed(),
+                    c.getLastReviewed(),
+                    c.getCardTypeId(),
+                    c.getCardTagId());
+        }
+    }
 }
