@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,16 +19,16 @@ public class Deck {
     private String deckName;
     private Timestamp createdAt;
     private Timestamp updatedAt;
-    private List<Card> cardList;
+    private List<Card> cardList  = new ArrayList<>();
 
     public Deck() {}
-    public Deck(int deckId, int userId, String deckName, Timestamp createdAt, Timestamp updatedAt, List<Card> cardList) {
+    public Deck(int deckId, int userId, String deckName, Timestamp createdAt, Timestamp updatedAt) {
         this.deckId = deckId;
         this.userId = userId;
         this.deckName = deckName;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
-        this.cardList = cardList;
+        this.cardList = new ArrayList<>();
     }
 
     public int getDeckId() {

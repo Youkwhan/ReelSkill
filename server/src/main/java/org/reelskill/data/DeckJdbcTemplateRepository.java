@@ -34,13 +34,13 @@ public class DeckJdbcTemplateRepository implements DeckRepository{
     }
 
     @Override
-    public Deck findByUserId(int userId) {
+    public Deck findById(int deckId) {
         String sql = """
                 select deck_id, user_id, deck_name, created_at, updated_at
                 from decks
-                where user_id = ?;
+                where deck_id = ?;
                 """;
-        Deck deck =  jdbcTemplate.query(sql, new DeckMapper(), userId).stream()
+        Deck deck =  jdbcTemplate.query(sql, new DeckMapper(), deckId).stream()
                 .findFirst()
                 .orElse(null);
         if (deck != null) {
@@ -54,8 +54,7 @@ public class DeckJdbcTemplateRepository implements DeckRepository{
     public Deck add(Deck deck) {
         String sql = """
                 insert into decks (user_id, deck_name)
-                values (?, ?)
-                returning deck_id;
+                values (?, ?);
                 """;
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -92,7 +91,7 @@ public class DeckJdbcTemplateRepository implements DeckRepository{
                 deck.getDeckId());
 
         if (rowsAffected > 0) {
-            updateCardsToDeck(deck);
+//            updateCardsToDeck(deck);
             return true;
         }
         return false;
