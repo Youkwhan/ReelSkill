@@ -10,4 +10,20 @@ public class CardTag {
         this.cardTagId = cardTagId;
         this.difficultyLevel = difficultyLevel;
     }
+
+    public int getCardTagId() {
+        return cardTagId;
+    }
+
+    public void setCardTagId(int cardTagId) {
+        this.cardTagId = cardTagId;
+    }
+
+    public Level getDifficultyLevel() {
+        return difficultyLevel;
+    }
+
+    public void setDifficultyLevel(Level difficultyLevel) {
+        this.difficultyLevel = difficultyLevel;
+    }
 }

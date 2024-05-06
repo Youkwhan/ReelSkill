@@ -39,83 +39,83 @@ public class Card {
         this.cardId = cardId;
     }
 
-    public int getDeck_id() {
+    public int getDeckId() {
         return deckId;
     }
 
-    public void setDeck_id(int deckId) {
+    public void setDeckId(int deckId) {
         this.deckId = deckId;
     }
 
-    public String getCard_title() {
+    public String getCardTitle() {
         return cardTitle;
     }
 
-    public void setCard_title(String cardTitle) {
+    public void setCardTitle(String cardTitle) {
         this.cardTitle = cardTitle;
     }
 
-    public String getCard_notes() {
+    public String getCardNotes() {
         return cardNotes;
     }
 
-    public void setCard_notes(String cardNotes) {
+    public void setCardNotes(String cardNotes) {
         this.cardNotes = cardNotes;
     }
 
-    public String getLeetcode_problem() {
+    public String getLeetcodeProblem() {
         return leetcodeProblem;
     }
 
-    public void setLeetcode_problem(String leetcodeProblem) {
+    public void setLeetcodeProblem(String leetcodeProblem) {
         this.leetcodeProblem = leetcodeProblem;
     }
 
-    public int getNumber_of_times_reviewed() {
+    public int getNumberOfTimesReviewed() {
         return numberOfTimesReviewed;
     }
 
-    public void setNumber_of_times_reviewed(int numberOfTimesReviewed) {
+    public void setNumberOfTimesReviewed(int numberOfTimesReviewed) {
         this.numberOfTimesReviewed = numberOfTimesReviewed;
     }
 
-    public Timestamp getLast_reviewed() {
+    public Timestamp getLastReviewed() {
         return lastReviewed;
     }
 
-    public void setLast_reviewed(Timestamp lastReviewed) {
+    public void setLastReviewed(Timestamp lastReviewed) {
         this.lastReviewed = lastReviewed;
     }
 
-    public Timestamp getCreated_at() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreated_at(Timestamp createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Timestamp getUpdated_at() {
+    public Timestamp getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdated_at(Timestamp updatedAt) {
+    public void setUpdatedAt(Timestamp updatedAt) {
         this.updatedAt = updatedAt;
     }
 
-    public int getCardType_id() {
+    public int getCardTypeId() {
         return cardTypeId;
     }
 
-    public void setCardType_id(int cardTypeId) {
+    public void setCardTypeId(int cardTypeId) {
         this.cardTypeId = cardTypeId;
     }
 
-    public int getCardTag_id() {
+    public int getCardTagId() {
         return cardTagId;
     }
 
-    public void setCardTag_id(int cardTagId) {
+    public void setCardTagId(int cardTagId) {
         this.cardTagId = cardTagId;
     }
 }

@@ -1,12 +1,19 @@
 package org.reelskill.models;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
 public class Deck {
     private int deckId;
+    @NotNull(message = "User ID must not be null")
     private int userId;
+    @NotBlank(message = "Deck name must not be blank")
+    @Size(max = 100, message = "Deck name must be less than 100 characters")
     private String deckName;
     private Timestamp createdAt;
     private List<Card> cardList;
