@@ -14,6 +14,7 @@ public class DeckMapper implements RowMapper<Deck> {
         deck.setUserId(rs.getInt("user_id"));
         deck.setDeckName(rs.getString("deck_name"));
         deck.setCreatedAt(rs.getTimestamp("created_at"));
+        deck.setUpdatedAt(rs.getTimestamp("updated_at"));
         return deck;
     }
 }

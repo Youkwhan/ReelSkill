@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -16,14 +17,16 @@ public class Deck {
     @Size(max = 100, message = "Deck name must be less than 100 characters")
     private String deckName;
     private Timestamp createdAt;
+    private Timestamp updatedAt;
     private List<Card> cardList;
 
     public Deck() {}
-    public Deck(int deckId, int userId, String deckName, Timestamp createdAt, List<Card> cardList) {
+    public Deck(int deckId, int userId, String deckName, Timestamp createdAt, Timestamp updatedAt, List<Card> cardList) {
         this.deckId = deckId;
         this.userId = userId;
         this.deckName = deckName;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
         this.cardList = cardList;
     }
 
@@ -57,6 +60,14 @@ public class Deck {
 
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public List<Card> getCardList() {

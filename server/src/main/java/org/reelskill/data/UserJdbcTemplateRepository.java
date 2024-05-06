@@ -110,7 +110,7 @@ public class UserJdbcTemplateRepository implements UserRepository{
 
     private void assignDeckToUser(User user) {
         String sql = """
-                select deck_id, user_id, deck_name, created_at
+                select deck_id, user_id, deck_name, created_at, updated_at
                 from decks
                 where user_id = ?;
                 """;
