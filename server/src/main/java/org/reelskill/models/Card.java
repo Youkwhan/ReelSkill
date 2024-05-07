@@ -11,9 +11,9 @@ public class Card {
     private int cardId;
     @NotNull(message = "Deck ID must not be null")
     private int deckId;
-    @NotNull(message = "Card title is required")
-    @NotBlank(message = "Card title is required")
-    @Size(max = 100, message = "Deck name must be less than 100 characters")
+//    @NotNull(message = "Card title is required")
+//    @NotBlank(message = "Card title is required")
+//    @Size(max = 100, message = "Deck name must be less than 100 characters")
     private String cardTitle;
     private String cardNotes;
     private String leetcodeProblem;

@@ -68,6 +68,21 @@ public class CardController {
         return makeResponseEntity(result, HttpStatus.NO_CONTENT);
     }
 
+    @PutMapping("/cardtype/{cardId}")
+    public ResponseEntity<?> updateCardType(@PathVariable int cardId, @Valid @RequestBody Card card, BindingResult bindingResult) {
+        if (cardId != card.getCardId()) {
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+
+        if (bindingResult.hasErrors()) {
+            return makeBindingResultResponseEntity(bindingResult);
+        }
+
+        Result<Card> result = service.updateCardType(card);
+        return makeResponseEntity(result, HttpStatus.NO_CONTENT);
+    }
+
+
     @DeleteMapping("/{cardId}")
     public ResponseEntity<Void> delete(@PathVariable int cardId) {
         boolean success = service.deleteById(cardId);

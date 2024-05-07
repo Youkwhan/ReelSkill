@@ -78,7 +78,7 @@ public class CardJdbcTemplateRepository implements CardRepository {
     public boolean update(Card card) {
         String sql = """
                 update cards set
-                    deck_id = ?, card_title = ?, card_notes = ?, leetcode_problem = ?, number_of_times_reviewed = ?
+                    deck_id = ?, card_title = ?, card_notes = ?, leetcode_problem = ?
                 where card_id = ?;
                 """;
 
@@ -87,7 +87,6 @@ public class CardJdbcTemplateRepository implements CardRepository {
                 card.getCardTitle(),
                 card.getCardNotes(),
                 card.getLeetcodeProblem(),
-                card.getNumberOfTimesReviewed(),
                 card.getCardId());
 
         if (rowsAffected > 0) {
@@ -101,12 +100,13 @@ public class CardJdbcTemplateRepository implements CardRepository {
     public boolean updateCardType(Card card) {
         String sql = """
                 update cards set
-                    card_type_id = ?
+                    card_type_id = ?, number_of_times_reviewed = ?
                 where card_id = ?;
                 """;
 
         int rowsAffected = jdbcTemplate.update(sql,
                 card.getCardTypeId(),
+                card.getNumberOfTimesReviewed(),
                 card.getCardId());
 
         if (rowsAffected > 0) {

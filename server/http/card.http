@@ -4,7 +4,7 @@ GET {{url}} HTTP/1.1
 
 ###
 
-GET {{url}}/1 HTTP/1.1
+GET {{url}}/6 HTTP/1.1
 
 ###
 
@@ -23,21 +23,30 @@ Accept: application/json
 
 ###
 // update
-PUT {{url}}/11 HTTP/1.1
+PUT {{url}}/6 HTTP/1.1
 Content-Type: application/json
 
 {
-  "cardId": 11,
+  "cardId": 6,
   "deckId": 2,
-  "cardTitle":"Card Title Test Updated",
+  "cardTitle":"Card Title Test Updated Second",
   "cardNotes":"Card Notes Test Updated",
-  "leetcodeProblem": "new leetcode problem Updated",
-  "numberOfTimesReviewed": 1
+  "leetcodeProblem": "new leetcode problem Updated"
 }
 
-//
+###
+// update cardtype
+PUT {{url}}/cardtype/6 HTTP/1.1
+Content-Type: application/json
+
+{
+  "cardId": 6,
+  "cardTypeId": 2,
+  "numberOfTimesReviewed": 2
+}
+
 
 ###
 
 // delete
-DELETE {{url}}/11 HTTP/1.1
+DELETE {{url}}/6 HTTP/1.1
