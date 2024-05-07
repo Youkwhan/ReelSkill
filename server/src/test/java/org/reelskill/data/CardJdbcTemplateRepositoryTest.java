@@ -94,6 +94,18 @@ class CardJdbcTemplateRepositoryTest {
     }
 
     @Test
+    void shouldUpdateCardType() {
+        Card card = repository.findById(1);
+
+        assertNull(card.getCardTypeId());
+        card.setCardTypeId(2);
+        assertTrue(repository.updateCardType(card));
+
+        Card updatedCard = repository.findById(1);
+        assertEquals(2, updatedCard.getCardTypeId());
+    }
+
+    @Test
     void deleteById() {
         assertTrue(repository.deleteById(1));
         assertNull(repository.findById(1));
