@@ -41,7 +41,7 @@ CREATE TABLE cards (
     card_notes TEXT,
     leetcode_problem VARCHAR(255),
     number_of_times_reviewed INT DEFAULT 0,
-    last_reviewed TIMESTAMP,
+    last_reviewed TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     card_type_id INT,

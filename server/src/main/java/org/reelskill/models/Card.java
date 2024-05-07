@@ -1,6 +1,7 @@
 package org.reelskill.models;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Card {
     private int cardId;
@@ -103,7 +104,7 @@ public class Card {
         this.updatedAt = updatedAt;
     }
 
-    public int getCardTypeId() {
+    public Integer getCardTypeId() {
         return cardTypeId;
     }
 
@@ -117,5 +118,18 @@ public class Card {
 
     public void setCardTagId(int cardTagId) {
         this.cardTagId = cardTagId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card = (Card) o;
+        return cardId == card.cardId && deckId == card.deckId && numberOfTimesReviewed == card.numberOfTimesReviewed && cardTagId == card.cardTagId && Objects.equals(cardTitle, card.cardTitle) && Objects.equals(cardNotes, card.cardNotes) && Objects.equals(leetcodeProblem, card.leetcodeProblem) && Objects.equals(lastReviewed, card.lastReviewed) && Objects.equals(createdAt, card.createdAt) && Objects.equals(updatedAt, card.updatedAt) && Objects.equals(cardTypeId, card.cardTypeId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(cardId, deckId, cardTitle, cardNotes, leetcodeProblem, numberOfTimesReviewed, lastReviewed, createdAt, updatedAt, cardTypeId, cardTagId);
     }
 }
