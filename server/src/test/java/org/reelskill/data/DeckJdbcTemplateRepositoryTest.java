@@ -26,8 +26,6 @@ class DeckJdbcTemplateRepositoryTest {
 
     static boolean hasRun = false;
 
-    private static User USER2 = new User(2, "user2@example.com", "user2", "password2", Role.USER);
-
     @BeforeEach
     void setup() {
         if (!hasRun) {

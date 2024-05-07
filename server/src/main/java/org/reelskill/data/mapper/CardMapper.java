@@ -20,6 +20,9 @@ public class CardMapper implements RowMapper<Card> {
         card.setCreatedAt(rs.getTimestamp("created_at"));
         card.setUpdatedAt(rs.getTimestamp("updated_at"));
         card.setCardTypeId(rs.getInt("card_type_id"));
+        if (rs.wasNull()) {
+            card.setCardTypeId(null);
+        }
         card.setCardTagId(rs.getInt("card_tag_id"));
         return card;
     }

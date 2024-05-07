@@ -51,8 +51,8 @@ public class CardJdbcTemplateRepository implements CardRepository {
         String sql = """
                 insert into cards
                 (deck_id, card_title, card_notes, leetcode_problem,
-                number_of_times_reviewed, last_reviewed, card_type_id, card_tag_id)
-                values (?, ?, ?, ?, ?, ?, ?, ?)
+                number_of_times_reviewed, card_type_id, card_tag_id)
+                values (?, ?, ?, ?, ?, ?, ?)
                 """;
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -63,9 +63,8 @@ public class CardJdbcTemplateRepository implements CardRepository {
             statement.setString(3, card.getCardNotes());
             statement.setString(4, card.getLeetcodeProblem());
             statement.setInt(5, card.getNumberOfTimesReviewed());
-            statement.setTimestamp(6, card.getLastReviewed());
-            statement.setInt(7, card.getCardTypeId());
-            statement.setInt(8, card.getCardTagId());
+            statement.setInt(6, card.getCardTypeId());
+            statement.setInt(7, card.getCardTagId());
             return statement;
         }, keyHolder);
 
@@ -83,7 +82,7 @@ public class CardJdbcTemplateRepository implements CardRepository {
         String sql = """
                 update cards set
                     deck_id = ?, card_title = ?, card_notes = ?, leetcode_problem = ?,
-                    number_of_times_reviewed = ?, last_reviewed = ?, card_type_id = ?
+                    number_of_times_reviewed = ?, card_type_id = ?
                 where card_id = ?;
                 """;
 
@@ -93,8 +92,8 @@ public class CardJdbcTemplateRepository implements CardRepository {
                 card.getCardNotes(),
                 card.getLeetcodeProblem(),
                 card.getNumberOfTimesReviewed(),
-                card.getLastReviewed(),
                 card.getCardTypeId(),
+//                        == null ? null : card.getCardTypeId(),
                 card.getCardId());
 
         if (rowsAffected > 0) {

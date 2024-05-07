@@ -104,7 +104,7 @@ public class Card {
         this.updatedAt = updatedAt;
     }
 
-    public int getCardTypeId() {
+    public Integer getCardTypeId() {
         return cardTypeId;
     }
 
