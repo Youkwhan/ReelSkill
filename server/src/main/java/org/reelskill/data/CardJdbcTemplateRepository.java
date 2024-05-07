@@ -50,9 +50,8 @@ public class CardJdbcTemplateRepository implements CardRepository {
     public Card add(Card card) {
         String sql = """
                 insert into cards
-                (deck_id, card_title, card_notes, leetcode_problem,
-                number_of_times_reviewed, card_type_id, card_tag_id)
-                values (?, ?, ?, ?, ?, ?, ?)
+                (deck_id, card_title, card_notes, leetcode_problem, card_tag_id)
+                values (?, ?, ?, ?, ?)
                 """;
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -62,9 +61,7 @@ public class CardJdbcTemplateRepository implements CardRepository {
             statement.setString(2, card.getCardTitle());
             statement.setString(3, card.getCardNotes());
             statement.setString(4, card.getLeetcodeProblem());
-            statement.setInt(5, card.getNumberOfTimesReviewed());
-            statement.setInt(6, card.getCardTypeId());
-            statement.setInt(7, card.getCardTagId());
+            statement.setInt(5, card.getCardTagId());
             return statement;
         }, keyHolder);
 

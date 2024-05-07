@@ -1,0 +1,42 @@
+@url = http://localhost:8080/api/card
+
+GET {{url}} HTTP/1.1
+
+###
+
+GET {{url}}/1 HTTP/1.1
+
+###
+
+# Create a new Card
+POST {{url}} HTTP/1.1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "deckId": 2,
+  "cardTitle":"Card Title Test",
+  "cardNotes":"Card Notes Test",
+  "leetcodeProblem": "new leetcode problem",
+  "cardTagId": 1
+}
+
+###
+// update
+PUT {{url}}/6 HTTP/1.1
+Content-Type: application/json
+
+{
+  "cardId": 6,
+  "deckId": 2,
+  "cardTitle":"Card Title Test Updated",
+  "cardNotes":"Card Notes Test Updated",
+  "leetcodeProblem": "new leetcode problem Updated",
+  "numberOfTimesReviewed": 1,
+  "cardTypeId": 1
+}
+
+###
+
+// delete
+DELETE {{url}}/10 HTTP/1.1
