@@ -93,7 +93,6 @@ public class CardJdbcTemplateRepository implements CardRepository {
                 card.getLeetcodeProblem(),
                 card.getNumberOfTimesReviewed(),
                 card.getCardTypeId(),
-//                        == null ? null : card.getCardTypeId(),
                 card.getCardId());
 
         if (rowsAffected > 0) {

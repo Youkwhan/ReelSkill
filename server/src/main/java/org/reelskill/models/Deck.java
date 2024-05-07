@@ -14,6 +14,7 @@ public class Deck {
     private int deckId;
     @NotNull(message = "User ID must not be null")
     private int userId;
+    @NotNull(message = "Deck name must not be null")
     @NotBlank(message = "Deck name must not be blank")
     @Size(max = 100, message = "Deck name must be less than 100 characters")
     private String deckName;
