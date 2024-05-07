@@ -2,30 +2,75 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Deck from '../Deck';
+import { save } from '../../api/deckApi';
 import { useAuthContext } from '../../hooks';
 import './style.css';
+import { findById } from '../../api/userApi';
 
 function Sidebar({ iconClass, ...props }) {
-  const { user } = useAuthContext();
+  const { user, login } = useAuthContext();
+
   // side bar toggle
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setEditing(false);
+    setShow(false);
+  };
   const toggleShow = () => setShow((s) => !s);
-
+  // error
+  const [showError, setShowError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
   // Deck edit toggle
   const [editing, setEditing] = useState(false);
   const [newDeckTitle, setNewDeckTitle] = useState('');
+
   const handleEditClick = () => {
     setEditing(true);
+    setShowError(false);
+    setErrorMessage('');
   };
   const handleInputChange = (e) => {
     setNewDeckTitle(e.target.value);
   };
 
   const handleCreateClick = () => {
-    // create Deck
-    setEditing(false);
-    setNewDeckTitle('');
+    // trim
+    const trimmedTitle = newDeckTitle.trim();
+
+    // check if title is empty
+    if (!trimmedTitle) {
+      setErrorMessage('Deck title cannot be empty');
+      setShowError(true);
+      return;
+    }
+
+    // create new deck object
+    const newDeck = {
+      userId: user.userId,
+      deckName: trimmedTitle,
+    };
+
+    // add function
+    save(newDeck)
+      .then(() => {
+        // sucess
+        console.log('Deck saved successfully');
+        findById(user.userId).then((data) => {
+          login(data);
+        });
+        setShowError(false);
+      })
+      .catch((error) => {
+        // error
+        console.error('Error saving deck', error);
+        setShowError(true);
+        setErrorMessage('Error saving deck');
+      })
+      .finally(() => {
+        // reset state
+        setEditing(false);
+        setNewDeckTitle('');
+      });
   };
 
   const handleDeleteClick = () => {
@@ -53,33 +98,41 @@ function Sidebar({ iconClass, ...props }) {
               )}
             </div>
             {editing && (
-              <div className="editing-controls">
-                <input
-                  type="text"
-                  className="form-control"
-                  value={newDeckTitle}
-                  onChange={handleInputChange}
-                />
-                <div className="editing-btns">
-                  <button
-                    className="btn btn-outline-success save-btn btn-sm"
-                    onClick={handleCreateClick}
-                  >
-                    <i class="bi bi-plus"></i>
-                  </button>
-                  <button
-                    className="btn btn-outline-secondary cancel-btn btn-sm"
-                    onClick={handleDeleteClick}
-                  >
-                    <i className="bi bi-x"></i>
-                  </button>
+              <>
+                <div className="editing-controls">
+                  <input
+                    type="text"
+                    className="form-control"
+                    value={newDeckTitle}
+                    onChange={handleInputChange}
+                  />
+                  <div className="editing-btns">
+                    <button
+                      className="btn btn-outline-success save-btn btn-sm"
+                      onClick={handleCreateClick}
+                    >
+                      <i className="bi bi-plus"></i>
+                    </button>
+                    <button
+                      className="btn btn-outline-secondary cancel-btn btn-sm"
+                      onClick={handleDeleteClick}
+                    >
+                      <i className="bi bi-x"></i>
+                    </button>
+                  </div>
                 </div>
-              </div>
+                {showError && (
+                  <p className="alert alert-danger error-message" role="alert">
+                    {errorMessage}
+                  </p>
+                )}
+              </>
             )}
             <div>
-              {user.deckList.map((deck) => (
-                <Deck key={deck.deckId} deck={deck} />
-              ))}
+              {user &&
+                user.deckList.map((deck) => (
+                  <Deck key={deck.deckId} deck={deck} />
+                ))}
             </div>
           </div>
         </Offcanvas.Body>

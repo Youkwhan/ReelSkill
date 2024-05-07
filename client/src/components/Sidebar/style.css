@@ -27,3 +27,7 @@
 .editing-btns button {
   margin-left: 10px;
 }
+
+.error-message {
+  margin-top: 10px;
+}

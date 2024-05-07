@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react';
+import { findById } from '../api/userApi';
 
 export const AuthContext = createContext();
 
@@ -8,7 +9,7 @@ function AuthProvider({ children }) {
     useState(false);
 
   useEffect(() => {
-    const userAccount = localStorage.getItem('userAccount')
+    let userAccount = localStorage.getItem('userAccount')
       ? JSON.parse(localStorage.getItem('userAccount'))
       : null;
     if (userAccount) {
