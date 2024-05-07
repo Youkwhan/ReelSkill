@@ -58,7 +58,7 @@ class CardJdbcTemplateRepositoryTest {
                 null,
                 null,
                 null,
-                1,
+                null,
                 1
         );
 
@@ -72,7 +72,7 @@ class CardJdbcTemplateRepositoryTest {
                 null,
                 null,
                 null,
-                1,
+                null,
                 1
         );
 

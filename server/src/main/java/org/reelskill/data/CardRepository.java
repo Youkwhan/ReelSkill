@@ -9,5 +9,6 @@ public interface CardRepository {
     Card findById(int cardId);
     Card add (Card card);
     boolean update(Card card);
+    boolean updateCardType(Card card);
     boolean deleteById(int cardId);
 }
