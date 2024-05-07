@@ -48,6 +48,20 @@ public class CardService {
         return result;
     }
 
+    public Result<Card> updateCardType(Card card) {
+        Result<Card> result = validate(card);
+        if (!result.isSuccess()) {
+            return result;
+        }
+
+        boolean success = repository.updateCardType(card);
+        if (!success) {
+            String msg = String.format("cardId %s not found", card.getCardId());
+            result.addMessage(msg, ResultType.NOT_FOUND);
+        }
+        return result;
+    }
+
     public boolean deleteById(int cardId) {
         return repository.deleteById(cardId);
     }

@@ -53,6 +53,19 @@ class CardServiceTest {
     }
 
     @Test
+    void shouldUpdateCardType() {
+        when(repository.updateCardType(any())).thenReturn(true);
+
+        Card card = new Card();
+        card.setCardId(5);
+        card.setDeckId(3);
+        card.setCardTitle("100. Card Name");
+
+        Result<Card> actual = service.updateCardType(card);
+        assertTrue(actual.isSuccess());
+    }
+
+    @Test
     void shouldDeleteCardById() {
         when(repository.deleteById(1)).thenReturn(true);
         assertTrue(service.deleteById(1));
