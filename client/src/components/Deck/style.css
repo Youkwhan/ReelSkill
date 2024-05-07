@@ -1,0 +1,42 @@
+.deck-tab {
+  border-radius: 10px;
+  border: solid 1px #0f0f0f;
+  margin-block: 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+.deck-content > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.deck-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.deck-content .deck-actions {
+  visibility: hidden;
+}
+
+.deck-content:hover .deck-actions {
+  visibility: visible;
+}
+
+i {
+  font-size: 1.2rem;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  background-color: transparent;
+}
+
+button:hover {
+  cursor: pointer;
+  scale: 1.1;
+}

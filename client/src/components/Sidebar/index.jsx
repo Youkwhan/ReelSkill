@@ -1,8 +1,12 @@
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Deck from '../Deck';
+import { useAuthContext } from '../../hooks';
+import './style.css';
 
-function Sidebar({ name, ...props }) {
+function Sidebar({ iconClass, ...props }) {
+  const { user } = useAuthContext();
   // side bar toggle
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -32,7 +36,7 @@ function Sidebar({ name, ...props }) {
   return (
     <>
       <Button variant="link-dark" onClick={toggleShow} className="me-2">
-        {name}
+        <i className={iconClass}></i>
       </Button>
       <Offcanvas show={show} onHide={handleClose} {...props}>
         <Offcanvas.Header closeButton>
@@ -40,66 +44,42 @@ function Sidebar({ name, ...props }) {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div>
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                borderBottom: '1px solid black',
-                marginBottom: '10px',
-              }}
-            >
-              <p style={{ marginBottom: '0', flex: '1' }}>Deck</p>
+            <div className="sidebar-header">
+              <p>Deck</p>
               {!editing && (
-                <Button
-                  variant="outline-primary"
-                  size="sm"
-                  onClick={handleEditClick}
-                >
-                  Edit
-                </Button>
+                <button className="btn-add-deck" onClick={handleEditClick}>
+                  <i className="bi bi-plus-square"></i>
+                </button>
               )}
             </div>
             {editing && (
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  marginTop: '10px',
-                }}
-              >
+              <div className="editing-controls">
                 <input
                   type="text"
+                  className="form-control"
                   value={newDeckTitle}
                   onChange={handleInputChange}
                 />
-                <Button
-                  variant="success"
-                  size="sm"
-                  onClick={handleCreateClick}
-                  style={{ marginLeft: '10px' }}
-                >
-                  Create
-                </Button>
-                <Button
-                  variant="danger"
-                  size="sm"
-                  onClick={handleDeleteClick}
-                  style={{ marginLeft: '10px' }}
-                >
-                  Delete
-                </Button>
+                <div className="editing-btns">
+                  <button
+                    className="btn btn-outline-success save-btn btn-sm"
+                    onClick={handleCreateClick}
+                  >
+                    <i class="bi bi-plus"></i>
+                  </button>
+                  <button
+                    className="btn btn-outline-secondary cancel-btn btn-sm"
+                    onClick={handleDeleteClick}
+                  >
+                    <i className="bi bi-x"></i>
+                  </button>
+                </div>
               </div>
             )}
             <div>
-              <p>
-                <a href="#">Deck link</a>
-              </p>
-              <p>
-                <a href="#">Deck link</a>
-              </p>
-              <p>
-                <a href="#">Deck link</a>
-              </p>
+              {user.deckList.map((deck) => (
+                <Deck key={deck.deckId} deck={deck} />
+              ))}
             </div>
           </div>
         </Offcanvas.Body>

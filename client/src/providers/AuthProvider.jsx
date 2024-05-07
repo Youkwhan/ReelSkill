@@ -11,7 +11,6 @@ function AuthProvider({ children }) {
     const userAccount = localStorage.getItem('userAccount')
       ? JSON.parse(localStorage.getItem('userAccount'))
       : null;
-    console.log(userAccount);
     if (userAccount) {
       login(userAccount);
     }

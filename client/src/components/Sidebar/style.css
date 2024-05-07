@@ -1,0 +1,29 @@
+/* Sidebar.css */
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  margin-bottom: 10px;
+}
+
+.sidebar-header p {
+  margin-bottom: 0;
+  flex: 1;
+}
+
+.editing-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+  gap: 0.5rem;
+}
+
+.editing-controls input {
+  flex: 1;
+}
+
+.editing-btns button {
+  margin-left: 10px;
+}

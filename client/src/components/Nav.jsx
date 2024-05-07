@@ -8,7 +8,7 @@ function Nav() {
   const { user } = useAuthContext();
   const handleDarkMode = useDarkMode();
   const scrollOption = {
-    name: '>>',
+    iconClass: 'bi bi-arrow-right-square',
     scroll: true,
     backdrop: false,
   };
@@ -31,9 +31,10 @@ function Nav() {
               id="switchDarkMode"
               onChange={handleDarkMode}
             />
-            <label className="form-check-label" htmlFor="switchDarkMode">
-              Dark Mode
-            </label>
+            <label
+              className="form-check-label"
+              htmlFor="switchDarkMode"
+            ></label>
           </div>
         </Navbar.Collapse>
       </Container>
