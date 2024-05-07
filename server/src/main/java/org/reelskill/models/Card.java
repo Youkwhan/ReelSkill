@@ -1,11 +1,19 @@
 package org.reelskill.models;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.sql.Timestamp;
 import java.util.Objects;
 
 public class Card {
     private int cardId;
+    @NotNull(message = "Deck ID must not be null")
     private int deckId;
+    @NotNull(message = "Card title is required")
+    @NotBlank(message = "Card title is required")
+    @Size(max = 100, message = "Deck name must be less than 100 characters")
     private String cardTitle;
     private String cardNotes;
     private String leetcodeProblem;
