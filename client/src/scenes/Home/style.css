@@ -1,0 +1,30 @@
+.home {
+  height: 94vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.home-container {
+  padding: 5rem 10rem;
+  border: 2px solid black;
+  border-radius: 40px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.home-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.home-description {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 1rem;
+}

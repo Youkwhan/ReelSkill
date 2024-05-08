@@ -5,6 +5,12 @@
   padding: 0.5rem 1rem;
 }
 
+span:hover {
+  cursor: pointer;
+  color: rgb(168, 195, 221);
+  text-decoration: underline;
+}
+
 .deck-content > div {
   display: flex;
   align-items: center;

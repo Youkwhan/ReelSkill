@@ -3,14 +3,17 @@ import Navbar from 'react-bootstrap/Navbar';
 
 import Sidebar from './Sidebar';
 import { useAuthContext, useDarkMode } from '../hooks';
+import { Link } from 'react-router-dom';
 
-function Nav() {
+function Nav({ show, setShow }) {
   const { user, logout } = useAuthContext();
   const handleDarkMode = useDarkMode();
   const scrollOption = {
     iconClass: 'bi bi-arrow-right-square',
     scroll: true,
     backdrop: false,
+    show,
+    setShow,
   };
 
   function handleLogout(evt) {
@@ -22,22 +25,24 @@ function Nav() {
     <Navbar className="bg-body-tertiary">
       <Container>
         {user && <Sidebar {...scrollOption} />}
-        <Navbar.Brand href="/home">ReelSkill</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/">
+          ReelSkill
+        </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            Signed in as: <a href="/">{user ? user.username : 'Guest'}</a>
+            Signed in as: <Link to="/">{user ? user.username : 'Guest'}</Link>
           </Navbar.Text>
           <div className="d-flex align-items-center">
             <div className="me-3">
               {user && (
-                <a
-                  href="#"
+                <Link
+                  to="/login"
                   className="btn btn-danger btn-sm"
                   onClick={handleLogout}
                 >
                   Log out
-                </a>
+                </Link>
               )}
             </div>
             <div className="form-check form-switch">

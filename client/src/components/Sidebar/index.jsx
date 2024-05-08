@@ -9,9 +9,8 @@ import { findById } from '../../api/userApi';
 
 function Sidebar({ iconClass, ...props }) {
   const { user, login } = useAuthContext();
-
+  const { show, setShow, scroll, backdrop } = props;
   // side bar toggle
-  const [show, setShow] = useState(false);
   const handleClose = () => {
     setEditing(false);
     setShow(false);
@@ -29,6 +28,7 @@ function Sidebar({ iconClass, ...props }) {
     setShowError(false);
     setErrorMessage('');
   };
+
   const handleInputChange = (e) => {
     setNewDeckTitle(e.target.value);
   };
@@ -83,7 +83,13 @@ function Sidebar({ iconClass, ...props }) {
       <Button variant="link-dark" onClick={toggleShow} className="me-2">
         <i className={iconClass}></i>
       </Button>
-      <Offcanvas show={show} onHide={handleClose} {...props}>
+      <Offcanvas
+        className="sidebar-container"
+        show={show}
+        onHide={handleClose}
+        scroll={scroll}
+        backdrop={backdrop}
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>ReelSkill</Offcanvas.Title>
         </Offcanvas.Header>

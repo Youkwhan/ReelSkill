@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-import { findById } from '../api/userApi';
 
 export const AuthContext = createContext();
 

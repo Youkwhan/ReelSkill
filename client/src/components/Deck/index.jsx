@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 import { deleteById } from '../../api/deckApi';
 import { findById } from '../../api/userApi';
 import { useAuthContext } from '../../hooks';
 import { save } from '../../api/deckApi';
 
 function Deck({ deck }) {
+  const navigate = useNavigate();
   const { user, login } = useAuthContext();
   const [editing, setEditing] = useState(false);
   const [newDeckName, setNewDeckName] = useState(deck.deckName);
@@ -76,6 +78,10 @@ function Deck({ deck }) {
     setNewDeckName(event.target.value);
   };
 
+  const handleDeckClick = () => {
+    navigate('/review', { state: { deckId: deck.deckId } });
+  };
+
   return (
     <div className="deck-tab">
       <div className="deck-content">
@@ -111,7 +117,7 @@ function Deck({ deck }) {
           </>
         ) : (
           <div>
-            <span>{deck.deckName}</span>
+            <span onClick={handleDeckClick}>{deck.deckName}</span>
             <div className="deck-actions">
               <button
                 className="btn btn-outline-primary edit-btn btn-sm"
