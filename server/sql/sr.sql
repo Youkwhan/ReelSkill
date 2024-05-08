@@ -45,7 +45,7 @@ CREATE TABLE cards (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     card_type_id INT,
-    card_tag_id INT NOT NULL,
+    card_tag_id INT,
     FOREIGN KEY (deck_id) REFERENCES decks(deck_id),
     FOREIGN KEY (card_type_id) REFERENCES cardType(card_type_id),
     FOREIGN KEY (card_tag_id) REFERENCES cardTag(card_tag_id)

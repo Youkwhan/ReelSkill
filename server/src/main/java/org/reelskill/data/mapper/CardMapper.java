@@ -24,6 +24,9 @@ public class CardMapper implements RowMapper<Card> {
             card.setCardTypeId(null);
         }
         card.setCardTagId(rs.getInt("card_tag_id"));
+        if (rs.wasNull()) {
+            card.setCardTagId(null);
+        }
         return card;
     }
 }

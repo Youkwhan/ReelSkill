@@ -73,8 +73,9 @@ class CardJdbcTemplateRepositoryTest {
                 null,
                 null,
                 null,
-                1
+                null
         );
+        expected.setCardTagId(1);
 
         Card actual = repository.add(card);
         assertNotNull(actual);

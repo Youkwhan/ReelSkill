@@ -22,11 +22,11 @@ public class Card {
     private Timestamp createdAt;
     private Timestamp updatedAt;
     private Integer cardTypeId;
-    private int cardTagId;
+    private Integer cardTagId;
 
     public Card() {}
 
-    public Card(int cardId, int deckId, String cardTitle, String cardNotes, String leetcodeProblem, int numberOfTimesReviewed, Timestamp lastReviewed, Timestamp createdAt, Timestamp updatedAt, Integer cardTypeId, int cardTagId) {
+    public Card(int cardId, int deckId, String cardTitle, String cardNotes, String leetcodeProblem, int numberOfTimesReviewed, Timestamp lastReviewed, Timestamp createdAt, Timestamp updatedAt, Integer cardTypeId, Integer cardTagId) {
         this.cardId = cardId;
         this.deckId = deckId;
         this.cardTitle = cardTitle;
@@ -120,11 +120,11 @@ public class Card {
         this.cardTypeId = cardTypeId;
     }
 
-    public int getCardTagId() {
+    public Integer getCardTagId() {
         return cardTagId;
     }
 
-    public void setCardTagId(int cardTagId) {
+    public void setCardTagId(Integer cardTagId) {
         this.cardTagId = cardTagId;
     }
 

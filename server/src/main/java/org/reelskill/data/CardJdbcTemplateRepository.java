@@ -50,8 +50,8 @@ public class CardJdbcTemplateRepository implements CardRepository {
     public Card add(Card card) {
         String sql = """
                 insert into cards
-                (deck_id, card_title, card_notes, leetcode_problem, card_tag_id)
-                values (?, ?, ?, ?, ?)
+                (deck_id, card_title)
+                values (?, ?)
                 """;
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
@@ -59,9 +59,6 @@ public class CardJdbcTemplateRepository implements CardRepository {
             PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             statement.setInt(1, card.getDeckId());
             statement.setString(2, card.getCardTitle());
-            statement.setString(3, card.getCardNotes());
-            statement.setString(4, card.getLeetcodeProblem());
-            statement.setInt(5, card.getCardTagId());
             return statement;
         }, keyHolder);
 
@@ -78,7 +75,7 @@ public class CardJdbcTemplateRepository implements CardRepository {
     public boolean update(Card card) {
         String sql = """
                 update cards set
-                    deck_id = ?, card_title = ?, card_notes = ?, leetcode_problem = ?
+                    deck_id = ?, card_title = ?, card_notes = ?, leetcode_problem = ?, card_tag_id = ?
                 where card_id = ?;
                 """;
 
@@ -87,6 +84,7 @@ public class CardJdbcTemplateRepository implements CardRepository {
                 card.getCardTitle(),
                 card.getCardNotes(),
                 card.getLeetcodeProblem(),
+                card.getCardTagId(),
                 card.getCardId());
 
         if (rowsAffected > 0) {

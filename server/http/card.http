@@ -15,10 +15,7 @@ Accept: application/json
 
 {
   "deckId": 2,
-  "cardTitle":"Card Title Test",
-  "cardNotes":"Card Notes Test",
-  "leetcodeProblem": "new leetcode problem",
-  "cardTagId": 1
+  "cardTitle":"CardTitle TEST"
 }
 
 ###
@@ -31,7 +28,8 @@ Content-Type: application/json
   "deckId": 2,
   "cardTitle":"Card Title Test Updated Second",
   "cardNotes":"Card Notes Test Updated",
-  "leetcodeProblem": "new leetcode problem Updated"
+  "leetcodeProblem": "new leetcode problem Updated",
+  "cardTagId": 1
 }
 
 ###
@@ -42,7 +40,7 @@ Content-Type: application/json
 {
   "cardId": 6,
   "cardTypeId": 2,
-  "numberOfTimesReviewed": 2
+  "numberOfTimesReviewed": 1
 }
 
 
