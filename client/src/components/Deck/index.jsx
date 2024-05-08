@@ -79,7 +79,7 @@ function Deck({ deck }) {
   };
 
   const handleDeckClick = () => {
-    navigate('/review', { state: { deckId: deck.deckId } });
+    navigate(`/review/${deck.deckId}`);
   };
 
   return (

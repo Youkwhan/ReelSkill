@@ -24,7 +24,7 @@ function App() {
               user ? <Home setShow={setShow} /> : <Navigate to="/login" />
             }
           />
-          <Route path="/review" element={<Review />} />
+          <Route path="/review/:deckId" element={<Review />} />
           <Route path="/login" element={<Login />} />
           <Route />
         </Routes>

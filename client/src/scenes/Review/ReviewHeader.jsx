@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useAuthContext } from '../../hooks';
+import Card from '../../components/Card';
 
 function ReviewHeader({ deck }) {
   const [editing, setEditing] = useState(false);
@@ -26,8 +27,8 @@ function ReviewHeader({ deck }) {
   };
 
   return (
-    <div>
-      <div>
+    <div className="reviewheader-container">
+      <div className="reviewheader-header">
         <p>{deck && deck.deckName}</p>
         {!editing && (
           <button className="btn-add-deck" onClick={handleEditClick}>
@@ -66,6 +67,11 @@ function ReviewHeader({ deck }) {
           )}
         </>
       )}
+      <div>
+        {/* render Cards */}
+        {deck &&
+          deck.cardList.map((card) => <Card key={card.cardId} card={card} />)}
+      </div>
     </div>
   );
 }

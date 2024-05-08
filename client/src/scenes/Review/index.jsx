@@ -1,20 +1,22 @@
-import { useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ReviewHeader from './ReviewHeader';
 import './style.css';
 import { useEffect, useState } from 'react';
 import { findById } from '../../api/deckApi';
 
 function Review() {
-  const location = useLocation();
-  const { deckId } = location.state;
+  const { deckId } = useParams();
   const [deck, setDeck] = useState(null);
+  console.log(deck);
 
   useEffect(() => {
-    findById(deckId).then((data) => {
-      setDeck(data);
-      console.log(deck);
-    });
+    if (deckId) {
+      findById(deckId).then((data) => {
+        setDeck(data);
+      });
+    }
   }, [deckId]);
+
   return (
     <div>
       <header className="review-header">
@@ -26,7 +28,7 @@ function Review() {
         </div>
         <i className="bi bi-arrow-counterclockwise"></i>
       </header>
-      <main>
+      <main className=" container">
         <ReviewHeader deck={deck} />
       </main>
     </div>
