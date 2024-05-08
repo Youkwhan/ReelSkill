@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Card from '../../components/Card';
 import { Accordion } from 'react-bootstrap';
+import { add } from '../../api/cardApi';
+import { findById } from '../../api/deckApi';
 
-function ReviewHeader({ deck }) {
+function ReviewHeader({ deck, setDeck }) {
   const [editing, setEditing] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState('');
   // error
@@ -27,6 +29,31 @@ function ReviewHeader({ deck }) {
       setShowError(true);
       return;
     }
+
+    const newCard = {
+      deckId: deck.deckId,
+      cardTitle: trimmedTitle,
+    };
+
+    // add function
+    add(newCard)
+      .then(() => {
+        console.log('Card saved successfully');
+        // reload deck
+        findById(deck.deckId).then((data) => {
+          setDeck(data);
+        });
+        setShowError(false);
+      })
+      .catch((error) => {
+        console.error('Error saving card', error);
+        setShowError(true);
+        setErrorMessage('Error saving card');
+      })
+      .finally(() => {
+        setEditing(false);
+        setNewCardTitle('');
+      });
   };
 
   const handleDeleteClick = () => {

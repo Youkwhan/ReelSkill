@@ -29,7 +29,7 @@ function Review() {
         <i className="bi bi-arrow-counterclockwise"></i>
       </header>
       <main className=" container">
-        <ReviewHeader deck={deck} />
+        <ReviewHeader deck={deck} setDeck={setDeck} />
       </main>
     </div>
   );
