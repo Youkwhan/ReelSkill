@@ -107,7 +107,12 @@ function ReviewHeader({ deck, setDeck }) {
         <Accordion>
           {deck &&
             deck.cardList.map((card, index) => (
-              <Card key={card.cardId} card={card} index={index} />
+              <Card
+                key={card.cardId}
+                card={card}
+                index={index}
+                setDeck={setDeck}
+              />
             ))}
         </Accordion>
       </div>

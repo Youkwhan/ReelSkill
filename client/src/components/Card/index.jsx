@@ -1,8 +1,9 @@
 import { Accordion, AccordionBody, AccordionHeader } from 'react-bootstrap';
 import './card.css';
 import { useState } from 'react';
+import { deleteById } from '../../api/cardApi';
 
-function index({ card, index }) {
+function index({ card, index, setDeck }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newCardTitle, setNewCardTitle] = useState(card.cardTitle ?? '');
   const [newCardNotes, setNewCardNotes] = useState(card.cardNotes ?? '');
@@ -21,9 +22,22 @@ function index({ card, index }) {
     setIsEditing(false);
   };
 
-  const handleSave = () => {};
+  const handleFormSubmit = () => {};
 
-  const handleDelete = () => {};
+  const handleDelete = () => {
+    console.log(card);
+    // delete deck
+    deleteById(card.cardId).then(() => {
+      console.log('Card deleted successfully');
+      setDeck((prevDeck) => {
+        const updatedDeck = { ...prevDeck };
+        updatedDeck.cardList = updatedDeck.cardList.filter(
+          (c) => c.cardId !== card.cardId
+        );
+        return updatedDeck;
+      });
+    });
+  };
 
   return (
     <Accordion.Item eventKey={index}>
@@ -41,7 +55,7 @@ function index({ card, index }) {
       </AccordionHeader>
       <AccordionBody>
         {isEditing ? (
-          <form onSubmit={handleSave}>
+          <form onSubmit={handleFormSubmit}>
             <div className="mb-3">
               <label htmlFor="cardTitle" className="form-label">
                 Card Title
