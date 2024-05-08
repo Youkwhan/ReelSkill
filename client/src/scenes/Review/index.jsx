@@ -19,7 +19,7 @@ function Review() {
 
   return (
     <div>
-      <header className="review-header">
+      <header className="review-header mt-3">
         <span>{`review/${deckId}`}</span>
         <div className="review-filter-btn">
           <button>Review</button> {' / '}

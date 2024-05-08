@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './style.css';
+import './deck.css';
 import { useNavigate } from 'react-router-dom';
 import { deleteById } from '../../api/deckApi';
 import { findById } from '../../api/userApi';

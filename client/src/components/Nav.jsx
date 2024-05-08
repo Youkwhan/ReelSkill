@@ -34,7 +34,7 @@ function Nav({ show, setShow }) {
             Signed in as: <Link to="/">{user ? user.username : 'Guest'}</Link>
           </Navbar.Text>
           <div className="d-flex align-items-center">
-            <div className="me-3">
+            <div className="ms-3 me-3">
               {user && (
                 <Link
                   to="/login"

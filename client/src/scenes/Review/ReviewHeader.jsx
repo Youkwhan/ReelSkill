@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useAuthContext } from '../../hooks';
 import Card from '../../components/Card';
+import { Accordion } from 'react-bootstrap';
 
 function ReviewHeader({ deck }) {
   const [editing, setEditing] = useState(false);
@@ -19,7 +19,15 @@ function ReviewHeader({ deck }) {
     setNewCardTitle(e.target.value);
   };
 
-  const handleCreateClick = () => {};
+  const handleCreateClick = () => {
+    const trimmedTitle = newCardTitle.trim();
+
+    if (!trimmedTitle) {
+      setErrorMessage('Card title cannot be empty');
+      setShowError(true);
+      return;
+    }
+  };
 
   const handleDeleteClick = () => {
     setEditing(false);
@@ -38,7 +46,7 @@ function ReviewHeader({ deck }) {
       </div>
       {editing && (
         <>
-          <div className="editing-controls">
+          <div className="editing-controls mb-2">
             <input
               type="text"
               className="form-control"
@@ -69,8 +77,12 @@ function ReviewHeader({ deck }) {
       )}
       <div>
         {/* render Cards */}
-        {deck &&
-          deck.cardList.map((card) => <Card key={card.cardId} card={card} />)}
+        <Accordion>
+          {deck &&
+            deck.cardList.map((card, index) => (
+              <Card key={card.cardId} card={card} index={index} />
+            ))}
+        </Accordion>
       </div>
     </div>
   );

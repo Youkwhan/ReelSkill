@@ -1,6 +1,6 @@
 .deck-tab {
   border-radius: 10px;
-  border: solid 1px #0f0f0f;
+  border: solid 1px var(--border-color);
   margin-block: 0.5rem;
   padding: 0.5rem 1rem;
 }
@@ -42,7 +42,7 @@ button {
   background-color: transparent;
 }
 
-button:hover {
+.btn:hover {
   cursor: pointer;
   scale: 1.1;
 }

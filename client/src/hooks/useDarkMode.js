@@ -8,6 +8,10 @@ export default function useDarkMode() {
       'data-bs-theme',
       darkMode ? 'dark' : 'light'
     );
+    document.documentElement.style.setProperty(
+      '--border-color',
+      darkMode ? '#fff' : '#000' // border
+    );
   }, [darkMode]);
 
   return (evt) => setDarkMode(evt.target.checked);

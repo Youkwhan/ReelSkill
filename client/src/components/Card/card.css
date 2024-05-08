@@ -1,0 +1,21 @@
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 90%;
+}
+
+.card-tab .delete-btn {
+  visibility: hidden;
+}
+
+.card-tab:hover .delete-btn {
+  visibility: visible;
+}
+
+.accordion-body .button-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
