@@ -11,6 +11,24 @@ function ReviewHeader({ deck, setDeck }) {
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  // sorting by card id initally
+  const sortedCards =
+    deck &&
+    [...deck.cardList].sort((a, b) => {
+      // handle null, 3, 2, 1
+      if (a.cardTypeId === null && b.cardTypeId !== null) {
+        return -1;
+      }
+      if (a.cardTypeId !== null && b.cardTypeId === null) {
+        return 1;
+      }
+      // sorting in descending order
+      if (a.cardTypeId !== null && b.cardTypeId !== null) {
+        return b.cardTypeId - a.cardTypeId;
+      }
+      return 0;
+    });
+
   const handleEditClick = () => {
     setEditing(true);
     setShowError(false);
@@ -105,8 +123,8 @@ function ReviewHeader({ deck, setDeck }) {
       <div>
         {/* render Cards */}
         <Accordion>
-          {deck &&
-            deck.cardList.map((card, index) => (
+          {sortedCards &&
+            sortedCards.map((card, index) => (
               <Card
                 key={card.cardId}
                 card={card}
