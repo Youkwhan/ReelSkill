@@ -6,6 +6,38 @@
   width: 90%;
 }
 
+.card-tab button:focus {
+  box-shadow: none !important;
+  outline: none;
+}
+
+.border-nothing > button {
+  border: none;
+}
+.border-yellow > button {
+  border: 3px solid var(--bs-yellow);
+}
+.border-yellow > button:focus,
+.border-yellow > button:not(.collapsed) {
+  background-color: var(--bs-warning-bg-subtle) !important;
+}
+
+.border-green > button {
+  border: 3px solid var(--bs-green);
+}
+.border-green > button:focus,
+.border-green > button:not(.collapsed) {
+  background-color: var(--bs-success-bg-subtle) !important;
+}
+
+.border-red > button {
+  border: 3px solid var(--bs-red);
+}
+.border-red > button:focus,
+.border-red > button:not(.collapsed) {
+  background-color: var(--bs-danger-bg-subtle) !important;
+}
+
 .card-tab .delete-btn {
   visibility: hidden;
 }
@@ -18,4 +50,52 @@
   display: flex;
   gap: 0.5rem;
   margin-top: 1rem;
+}
+
+.card-header-left {
+  display: flex;
+  gap: 1rem;
+}
+
+.card-label {
+  border: 1px solid;
+  border-radius: 20px;
+  padding: 0.05rem 0.4rem;
+}
+
+.easy {
+  border-color: var(--bs-green);
+  color: var(--bs-green);
+}
+
+.med {
+  border-color: var(--bs-yellow);
+  color: var(--bs-yellow);
+}
+
+.hard {
+  border-color: var(--bs-red);
+  color: var(--bs-red);
+}
+
+.card-cardtype-btns > button {
+  font-size: larger;
+  transition: transform 0.3s ease;
+}
+
+.card-cardtype-btns > button:hover {
+  transform: translateY(2px);
+  text-decoration: underline;
+}
+
+.card-cardtype-btns button.easy:hover {
+  color: #198754;
+}
+
+.card-cardtype-btns button.med:hover {
+  color: #ffc107;
+}
+
+.card-cardtype-btns button.hard:hover {
+  color: #dc3545;
 }

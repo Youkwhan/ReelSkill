@@ -1,7 +1,44 @@
 import { Accordion, AccordionBody, AccordionHeader } from 'react-bootstrap';
 import './card.css';
 import { useState } from 'react';
-import { deleteById } from '../../api/cardApi';
+import {
+  deleteById,
+  update,
+  findById,
+  updateCardType,
+} from '../../api/cardApi';
+
+// function to determin className for cardTypeId
+function getClassForCardType(cardTypeId) {
+  switch (cardTypeId) {
+    case null:
+      return 'border-nothing';
+    case 1:
+      return 'border-green';
+    case 2:
+      return 'border-yellow';
+    case 3:
+      return 'border-red';
+    default:
+      return '';
+  }
+}
+
+// Card Tag labels
+function getCardTagLabel(cardTagId) {
+  switch (cardTagId) {
+    case null:
+      return '';
+    case 1:
+      return 'easy';
+    case 2:
+      return 'med';
+    case 3:
+      return 'hard';
+    default:
+      return '';
+  }
+}
 
 function index({ card, index, setDeck }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -22,7 +59,38 @@ function index({ card, index, setDeck }) {
     setIsEditing(false);
   };
 
-  const handleFormSubmit = () => {};
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+
+    // update card
+    const updatedCard = {
+      cardId: card.cardId,
+      deckId: card.deckId,
+      cardTitle: newCardTitle,
+      cardNotes: newCardNotes,
+      leetcodeProblem: newLeetcodeProblem,
+      cardTagId: parseInt(newCardTagId),
+    };
+
+    // update card
+    update(updatedCard)
+      .then(() => {
+        console.log('Card updated successfully');
+        findById(card.cardId).then((data) => {
+          setDeck((prevDeck) => {
+            const updatedDeck = { ...prevDeck };
+            updatedDeck.cardList = updatedDeck.cardList.map((c) =>
+              c.cardId === data.cardId ? data : c
+            );
+            return updatedDeck;
+          });
+        });
+        setIsEditing(false);
+      })
+      .catch((error) => {
+        console.error('Error updating card', error);
+      });
+  };
 
   const handleDelete = () => {
     console.log(card);
@@ -39,11 +107,47 @@ function index({ card, index, setDeck }) {
     });
   };
 
+  const handleCardType = (card, cardTypeId) => {
+    const updatedCard = {
+      cardId: card.cardId,
+      cardTypeId: parseInt(cardTypeId),
+      numberOfTimesReviewed: card.numberOfTimesReviewed + 1,
+    };
+
+    // update cardTtype
+    updateCardType(updatedCard)
+      .then(() => {
+        console.log('CardType updated successfully');
+        findById(card.cardId).then((data) => {
+          setDeck((prevDeck) => {
+            const updatedDeck = { ...prevDeck };
+            updatedDeck.cardList = updatedDeck.cardList.map((c) =>
+              c.cardId === data.cardId ? data : c
+            );
+            return updatedDeck;
+          });
+        });
+        setIsEditing(false);
+      })
+      .catch((error) => {
+        console.error('Error updating cardType', error);
+      });
+  };
+
   return (
     <Accordion.Item eventKey={index}>
-      <AccordionHeader className="card-tab">
+      <AccordionHeader
+        className={`card-tab ${getClassForCardType(card.cardTypeId)}`}
+      >
         <div className="card-header">
-          <span>{card.cardTitle}</span>
+          <div className="card-header-left">
+            <span>{card.cardTitle}</span>
+            {card.cardTagId && (
+              <div className={`card-label ${getCardTagLabel(card.cardTagId)}`}>
+                {getCardTagLabel(card.cardTagId)}
+              </div>
+            )}
+          </div>
 
           <button
             className="btn btn-outline-danger delete-btn  btn-sm"
@@ -169,10 +273,27 @@ function index({ card, index, setDeck }) {
                 <br />
                 {card.cardNotes}
               </p>
-              <div>
-                <button>easy</button> {' / '}
-                <button>med</button> {' / '}
-                <button>hard</button>
+              <div className="card-cardtype-btns">
+                <button
+                  className="easy"
+                  onClick={() => handleCardType(card, '1')}
+                >
+                  easy
+                </button>
+                {' / '}
+                <button
+                  className="med"
+                  onClick={() => handleCardType(card, '2')}
+                >
+                  med
+                </button>
+                {' / '}
+                <button
+                  className="hard"
+                  onClick={() => handleCardType(card, '3')}
+                >
+                  hard
+                </button>
               </div>
             </div>
             <div className="button-actions">
